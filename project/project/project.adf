@@ -19,8 +19,10 @@ FAMILY=
 [Files]
 /ALU.vhd=-1
 /ALU_tb.vhd=-1
+/shift-register-tb.vhd=-1
+/shift-register.vhd=-1
 [Files.Data]
 .\src\ALU.vhd=VHDL Source Code
 .\src\ALU_tb.vhd=VHDL Source Code
-.\src\shift_register.vhd=VHDL Source Code
-.\src\shift_register_tb.vhd=VHDL Source Code
+.\src\shift-register-tb.vhd=VHDL Source Code
+.\src\shift-register.vhd=VHDL Source Code
