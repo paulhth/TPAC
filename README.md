@@ -1,3 +1,3 @@
 # TPAC
-Booth divider
+Booth multiplier
 Team: David Ivan & Paul Horvath
