@@ -1,2 +1,3 @@
-# TPAVC
-Booth
+# TPAC
+Booth divider
+Team: David Ivan & Paul Horvath
