@@ -1,0 +1,261 @@
+# Design: Design project already active.
+# DESIGN: Default Design Language: VHDL
+# DESIGN: Default BDE Language: VHDL
+# DESIGN: Flow Manager: Not Defined
+acom -reorder -O3 -e 100 -work project -2002  $dsn/src/ALU.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# Incorrect order of units detected.
+# Automatic reorder and incremental recompilation of required units in progress.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# Error: COMP96_0078: ALU.vhd : (2, 18): Unknown identifier "STD_LOGIC_VECTOR".
+# Error: COMP96_0064: ALU.vhd : (2, 18): Unknown type.
+# Error: COMP96_0078: ALU.vhd : (3, 18): Unknown identifier "STD_LOGIC_VECTOR".
+# Error: COMP96_0064: ALU.vhd : (3, 18): Unknown type.
+# Error: COMP96_0078: ALU.vhd : (4, 19): Unknown identifier "STD_LOGIC_VECTOR".
+# Error: COMP96_0064: ALU.vhd : (4, 19): Unknown type.
+# Error: COMP96_0078: ALU.vhd : (5, 19): Unknown identifier "STD_LOGIC_VECTOR".
+# Error: COMP96_0064: ALU.vhd : (5, 19): Unknown type.
+# Error: COMP96_0056: ALU.vhd : (8, 1): Cannot find referenced entity declaration "ALU".
+# Compile failure 9 Errors 0 Warnings  Analysis time :  0.1 [s]
+acom -reorder -O3 -e 100 -work project -2002  $dsn/src/ALU.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# Incorrect order of units detected.
+# Automatic reorder and incremental recompilation of required units in progress.
+# Top-level unit(s) detected:
+# Entity => ALU
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Architecture "Behavioral" of Entity "ALU"
+# Error: COMP96_0753: ALU.vhd : (16, 29): Cannot find the "+" operator with operands denoted with the "[STD_LOGIC_VECTOR, STD_LOGIC_VECTOR]" signature.
+# Error: COMP96_0077: ALU.vhd : (16, 25): Undefined type of expression. Expected type 'STD_LOGIC_VECTOR'.
+# Error: COMP96_0753: ALU.vhd : (17, 29): Cannot find the "-" operator with operands denoted with the "[STD_LOGIC_VECTOR, STD_LOGIC_VECTOR]" signature.
+# Error: COMP96_0077: ALU.vhd : (17, 25): Undefined type of expression. Expected type 'STD_LOGIC_VECTOR'.
+# Compile failure 4 Errors 0 Warnings  Analysis time :  63.0 [ms]
+acom -O3 -e 100 -work project -2002  $dsn/src/ALU.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# Compile success 0 Errors 0 Warnings  Analysis time :  62.0 [ms]
+acom -O3 -e 100 -work project -2002  $dsn/src/ALU_tb.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU_tb.vhd
+# Compile Entity "ALU_tb"
+# Compile Architecture "sim" of Entity "ALU_tb"
+# Compile success 0 Errors 0 Warnings  Analysis time :  47.0 [ms]
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+asim -O5 +access +r +m+ALU_tb ALU_tb sim
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# VSIM: Stack memory: 32MB
+# VSIM: Retval memory: 32MB
+# 
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ps.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... skipped, nothing to simulate in SLP mode : 0.0 [s]
+# SLP: Finished : 0.0 [s]
+# ELAB2: Elaboration final pass complete - time: 0.1 [s].
+# KERNEL: Warning: You are using the Active-HDL Student Edition. The performance of simulation is running at a reduced rate.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5438 kB (elbread=427 elab2=4871 kernel=138 sdf=0)
+# KERNEL: ASDB file was created in location C:\Users\Paul\OneDrive - Universitatea Politehnica Timisoara\Desktop\UPT\An IV\Semestrul I\TPAC\Project\TPAC\project\project\src\wave.asdb
+#  12:57, Friday, November 3, 2023
+#  Simulation has been initialized
+endsim
+# VSIM: Simulation has finished.
+asim -O5 +access +r +m+ALU_tb ALU_tb sim
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# VSIM: Stack memory: 32MB
+# VSIM: Retval memory: 32MB
+# 
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ps.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... skipped, nothing to simulate in SLP mode : 0.0 [s]
+# SLP: Finished : 0.0 [s]
+# ELAB2: Elaboration final pass complete - time: 0.0 [s].
+# KERNEL: Warning: You are using the Active-HDL Student Edition. The performance of simulation is running at a reduced rate.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5438 kB (elbread=427 elab2=4871 kernel=138 sdf=0)
+# KERNEL: ASDB file was created in location C:\Users\Paul\OneDrive - Universitatea Politehnica Timisoara\Desktop\UPT\An IV\Semestrul I\TPAC\Project\TPAC\project\project\src\wave.asdb
+#  12:58, Friday, November 3, 2023
+#  Simulation has been initialized
+# add wave -noreg {/ALU_tb/A}
+# add wave -noreg {/ALU_tb/B}
+# add wave -noreg {/ALU_tb/Y}
+# add wave -noreg {/ALU_tb/op}
+# VSIM: 4 object(s) traced.
+# Waveform file 'untitled.awc' connected to 'C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb'.
+run
+# KERNEL: Simulation has finished. There are no more test vectors to simulate.
+run @300ns
+acom -O3 -e 100 -work project -2002  $dsn/src/ALU_tb.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU_tb.vhd
+# Compile Entity "ALU_tb"
+# Compile Architecture "sim" of Entity "ALU_tb"
+# Compile success 0 Errors 0 Warnings  Analysis time :  47.0 [ms]
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# 
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ps.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... skipped, nothing to simulate in SLP mode : 0.0 [s]
+# SLP: Finished : 0.0 [s]
+# ELAB2: Elaboration final pass complete - time: 0.0 [s].
+# KERNEL: Warning: You are using the Active-HDL Student Edition. The performance of simulation is running at a reduced rate.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5438 kB (elbread=427 elab2=4871 kernel=138 sdf=0)
+# KERNEL: ASDB file was created in location C:\Users\Paul\OneDrive - Universitatea Politehnica Timisoara\Desktop\UPT\An IV\Semestrul I\TPAC\Project\TPAC\project\project\src\wave.asdb
+#  12:59, Friday, November 3, 2023
+#  Simulation has been initialized
+# Waveform file 'untitled.awc' connected to 'C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb'.
+run
+# KERNEL: Simulation has finished. There are no more test vectors to simulate.
+acom -O3 -e 100 -work project -2002  $dsn/src/shift_register.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/shift_register.vhd
+# Compile Entity "shift_register"
+# Error: COMP96_0078: shift_register.vhd : (2, 19): Unknown identifier "STD_LOGIC".
+# Error: COMP96_0064: shift_register.vhd : (2, 19): Unknown type.
+# Error: COMP96_0078: shift_register.vhd : (3, 21): Unknown identifier "STD_LOGIC".
+# Error: COMP96_0064: shift_register.vhd : (3, 21): Unknown type.
+# Error: COMP96_0078: shift_register.vhd : (4, 19): Unknown identifier "STD_LOGIC_VECTOR".
+# Error: COMP96_0064: shift_register.vhd : (4, 19): Unknown type.
+# Error: COMP96_0078: shift_register.vhd : (5, 21): Unknown identifier "STD_LOGIC_VECTOR".
+# Error: COMP96_0064: shift_register.vhd : (5, 21): Unknown type.
+# Compile Architecture "behavioral" of Entity "shift_register"
+# Error: COMP96_0056: shift_register.vhd : (8, 1): Cannot find referenced entity declaration "shift_register".
+# Compile failure 9 Errors 0 Warnings  Analysis time :  32.0 [ms]
+acom -O3 -e 100 -work project -2002  $dsn/src/ALU.vhd $dsn/src/ALU_tb.vhd $dsn/src/shift_register.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU_tb.vhd
+# Compile Entity "ALU_tb"
+# Compile Architecture "sim" of Entity "ALU_tb"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/shift_register.vhd
+# Compile Entity "shift_register"
+# Compile Architecture "behavioral" of Entity "shift_register"
+# Compile success 0 Errors 0 Warnings  Analysis time :  0.1 [s]
+acom -O3 -e 100 -work project -2002  $dsn/src/ALU.vhd $dsn/src/ALU_tb.vhd $dsn/src/shift_register.vhd $dsn/src/shift_register_tb.vhd
+# Warning: DAGGEN_0523: The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available.
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU.vhd
+# Compile Entity "ALU"
+# Compile Architecture "Behavioral" of Entity "ALU"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/ALU_tb.vhd
+# Compile Entity "ALU_tb"
+# Compile Architecture "sim" of Entity "ALU_tb"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/shift_register.vhd
+# Compile Entity "shift_register"
+# Compile Architecture "behavioral" of Entity "shift_register"
+# File: C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/shift_register_tb.vhd
+# Compile Entity "shift_register_tb"
+# Compile Architecture "sim" of Entity "shift_register_tb"
+# Compile success 0 Errors 0 Warnings  Analysis time :  0.1 [s]
+endsim
+# VSIM: Simulation has finished.
+asim -O5 +access +r +m+ALU_tb ALU_tb sim
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# VSIM: Stack memory: 32MB
+# VSIM: Retval memory: 32MB
+# 
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ps.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... skipped, nothing to simulate in SLP mode : 0.0 [s]
+# SLP: Finished : 0.0 [s]
+# ELAB2: Elaboration final pass complete - time: 0.0 [s].
+# KERNEL: Warning: You are using the Active-HDL Student Edition. The performance of simulation is running at a reduced rate.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5438 kB (elbread=427 elab2=4871 kernel=138 sdf=0)
+# KERNEL: ASDB file was created in location C:\Users\Paul\OneDrive - Universitatea Politehnica Timisoara\Desktop\UPT\An IV\Semestrul I\TPAC\Project\TPAC\project\project\src\wave.asdb
+#  13:18, Friday, November 3, 2023
+#  Simulation has been initialized
+# Waveform file 'untitled.awc' connected to 'C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb'.
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+asim -O5 +access +r +m+shift_register_tb shift_register_tb sim
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# VSIM: Stack memory: 32MB
+# VSIM: Retval memory: 32MB
+# 
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ps.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... skipped, nothing to simulate in SLP mode : 0.0 [s]
+# SLP: Finished : 0.0 [s]
+# ELAB2: Elaboration final pass complete - time: 0.0 [s].
+# KERNEL: Warning: You are using the Active-HDL Student Edition. The performance of simulation is running at a reduced rate.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5400 kB (elbread=427 elab2=4833 kernel=139 sdf=0)
+# KERNEL: ASDB file was created in location C:\Users\Paul\OneDrive - Universitatea Politehnica Timisoara\Desktop\UPT\An IV\Semestrul I\TPAC\Project\TPAC\project\project\src\wave.asdb
+#  13:19, Friday, November 3, 2023
+#  Simulation has been initialized
+# Waveform file 'untitled.awc' connected to 'C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb'.
+# Warning: WAVEFORM: Object matching /ALU_tb/A not found in C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb.
+# Warning: WAVEFORM: Object matching /ALU_tb/B not found in C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb.
+# Warning: WAVEFORM: Object matching /ALU_tb/Y not found in C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb.
+# Warning: WAVEFORM: Object matching /ALU_tb/op not found in C:/Users/Paul/OneDrive - Universitatea Politehnica Timisoara/Desktop/UPT/An IV/Semestrul I/TPAC/Project/TPAC/project/project/src/wave.asdb.
+# add wave -noreg {/shift_register_tb/clk}
+# add wave -noreg {/shift_register_tb/rst_n}
+# add wave -noreg {/shift_register_tb/din}
+# add wave -noreg {/shift_register_tb/dout}
+# add wave -noreg {/shift_register_tb/clk_period}
+# VSIM: 5 object(s) traced.
+run
+endsim
+# KERNEL: stopped at time: 8575535 ns
+# VSIM: Simulation has finished.
