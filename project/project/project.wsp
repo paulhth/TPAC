@@ -1,0 +1,19 @@
+[CACHESIMPLE|Aldec.SymbolsCommands.7]
+Built-in symbols=0
+project=0
+[COMPILESTATUS|.\src\ALU.vhd]
+FileTimeLow=384440436
+FileTimeHigh=31067716
+Status=Compiled
+[COMPILESTATUS|.\src\ALU_tb.vhd]
+FileTimeLow=3700005406
+FileTimeHigh=31067716
+Status=Compiled
+[COMPILESTATUS|.\src\shift_register.vhd]
+FileTimeLow=1331744311
+FileTimeHigh=31067719
+Status=Compiled
+[COMPILESTATUS|.\src\shift_register_tb.vhd]
+FileTimeLow=1606437390
+FileTimeHigh=31067719
+Status=Compiled

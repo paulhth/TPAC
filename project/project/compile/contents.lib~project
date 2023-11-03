@@ -1,0 +1,9 @@
+6
+~E 1 "../src/ALU.vhd" 5 ALU
+~A 1 "../src/ALU.vhd" 14 Behavioral
+~E 1 "../src/ALU_tb.vhd" 4 ALU_tb
+~A 1 "../src/ALU_tb.vhd" 7 sim
+~E 1 "../src/shift_register.vhd" 4 shift_register
+~A 1 "../src/shift_register.vhd" 11 behavioral
+~E 1 "../src/shift_register_tb.vhd" 4 shift_register_tb
+~A 1 "../src/shift_register_tb.vhd" 7 sim

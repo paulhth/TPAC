@@ -1,0 +1,34 @@
+Active-HDL 13.0.376.8320 2023-11-03 13:19:36
+
+Elaboration top modules:
+Architecture                  sim(shift_register_tb)
+
+
+----------------------------------------------------------------------------------------------------
+Entity            | Architecture | Library | Info | Compiler Version          | Compilation Options
+----------------------------------------------------------------------------------------------------
+shift_register_tb | sim          | project |      | 13.0.376.8320 (Windows64) | -O3
+shift_register    | behavioral   | project |      | 13.0.376.8320 (Windows64) | -O3
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+VHDL Package                     | Library | Info | Compiler Version          | Compilation Options
+----------------------------------------------------------------------------------------------------
+standard                         | std     |      |                           | <unavailable>
+TEXTIO                           | std     |      | 13.0.376.8320 (Windows64) |  -2019
+std_logic_1164                   | ieee    |      | 13.0.376.8320 (Windows64) |  -2008
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Library                          | Comment
+----------------------------------------------------------------------------------------------------
+ieee                             | Standard IEEE packages library
+project                          | None
+std                              | Standard VHDL library
+----------------------------------------------------------------------------------------------------
+
+
+Simulation Options: asim -O5 +access +r +m+shift_register_tb shift_register_tb sim
+
+
+The performance of simulation is reduced. Version Student Edition

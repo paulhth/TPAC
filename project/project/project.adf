@@ -1,0 +1,26 @@
+[Project]
+Current Flow=Generic
+VCS=0
+version=4
+Current Config=compile
+[Configurations]
+compile=project
+[Library]
+project=.\project\project.lib
+[$LibMap$]
+project=.
+Active_lib=
+[Settings]
+FLOW_TYPE=HDL
+LANGUAGE=VHDL
+REFRESH_FLOW=1
+FLOWTOOLS=NONE
+FAMILY=
+[Files]
+/ALU.vhd=-1
+/ALU_tb.vhd=-1
+[Files.Data]
+.\src\ALU.vhd=VHDL Source Code
+.\src\ALU_tb.vhd=VHDL Source Code
+.\src\shift_register.vhd=VHDL Source Code
+.\src\shift_register_tb.vhd=VHDL Source Code
