@@ -1,9 +1,14 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;	 --has std_logic and std_logic_vector
+use IEEE.NUMERIC_STD.ALL;		 --has SIGNED() and UNSIGNED() functions
+
+
 ENTITY Control_Unit IS
     GENERIC (tp: TIME := 5ns);
     PORT (
-        input_bit: IN BIT; 
-        clock: IN BIT;
-        control_signals: OUT BIT_VECTOR(1 DOWNTO 0)
+        input_bit: in STD_LOGIC;
+        clock: in STD_LOGIC;
+        control_signals: OUT STD_LOGIC_VECTOR(1 downto 0)
     );
 END ENTITY;
 
