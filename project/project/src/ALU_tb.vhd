@@ -6,7 +6,7 @@ end ALU_tb;
 
 architecture sim of ALU_tb is
     signal A, B, Y : std_logic_vector(3 downto 0) := (others => '0');
-    signal op : std_logic;
+    signal op : std_logic_vector(1 downto 0) := "00";
 
 begin
     -- Instantiate the unit under test (UUT)
@@ -21,11 +21,11 @@ begin
     stim_proc: process
     begin
         -- Test addition
-        A <= "0010"; B <= "0001"; op <= '0'; 
+        A <= "0010"; B <= "0001"; op <= "00"; 
         wait for 100 ns;
         
         -- Test subtraction
-        A <= "0010"; B <= "0001"; op <= '1'; 
+        A <= "0010"; B <= "0001"; op <= "01"; 
         wait for 100 ns;
 
         wait;
