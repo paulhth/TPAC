@@ -1,0 +1,84 @@
+-- ... [previous code]
+
+architecture Behavioral of ControlUnit is
+    -- ... [previous declarations]
+
+    -- Initialize signals
+    signal count : integer := 0; -- Counter for the number of shifts
+begin
+    -- ... [component instantiations]
+
+    -- Initialize all signals on reset
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if reset = '1' then
+                current_state <= Idle;
+                aluOp <= '0';
+                loadVal <= '0';
+                shift_signal <= '0';
+                shiftReg <= (others => '0'); -- Clear the shift register
+                aluResult <= (others => '0'); -- Clear the ALU result
+                count <= 0; -- Reset the shift count
+                done <= '0'; -- Clear the done signal
+            else
+                case current_state is
+                    when Idle =>
+                        if start = '1' then
+                            next_state <= Load;
+                        else
+                            next_state <= Idle;
+                        end if;
+
+                    when Load =>
+                        -- Load the initial values into the shift register
+                        -- Set the lower half of shiftReg to multiplier, upper half to 0
+                        shiftReg <= "0000" & multiplier;
+                        count <= 4; -- Set the shift count for a 4-bit multiplier
+                        next_state <= Shift; -- Move to Shift state to start the algorithm
+
+                    -- ... [other states logic]
+
+                    when others =>
+                        next_state <= Idle;
+                end case;
+            end if;
+        end if;
+    end process;
+
+    -- Sequential logic to handle the ALU operation and shift register update
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            -- Logic for the ALU operation based on aluOp
+            -- ...
+
+            -- Logic for updating the shift register after ALU operation
+            -- ...
+        end if;
+    end process;
+
+    -- Sequential logic to handle the shifting of the shift register
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if shift_signal = '1' then
+                -- Perform the shift operation
+                -- Concatenate the sign bit to avoid losing it during shift
+                shiftReg <= shiftReg(7) & shiftReg(7 downto 1);
+                count <= count - 1; -- Decrement the count
+
+                if count = 0 then
+                    next_state <= Finish; -- If count is zero, finish the operation
+                else
+                    next_state <= Shift; -- Otherwise, continue shifting
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- Output assignments
+    product <= shiftReg; -- The product is in the shift register
+    done <= '1' when (current_state = Finish) else '0';
+
+end Behavioral;
