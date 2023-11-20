@@ -22,7 +22,7 @@ begin
             if load = '1' then
                 temp_Q <= initData; -- Load initial data
             elsif shift = '1' then
-                temp_Q <= temp_Q(7) & temp_Q(7 downto 1); -- Right shift and append '0'
+                temp_Q <= temp_Q(7) & temp_Q(7 downto 1); -- Right shift and append 
             end if;
         end if;
     end process;
