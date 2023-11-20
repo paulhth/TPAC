@@ -1,0 +1,13 @@
+			  when Shift =>
+                    -- Right shift the shift register
+                    loadVal <= '0'; -- No loading, just shifting
+                    shift_signal <= '1'; -- Enable shifting
+                    -- Check if the operation is complete
+                    if shiftReg(0) = '1' then
+                        next_state <= Add; -- If LSB is 1, add the multiplicand
+                    elsif shiftReg(1) = '1' then
+                        next_state <= Subtract; -- If second LSB is 1, subtract the multiplicand
+                    else
+                        next_state <= Finish; -- If both are 0, finish the operation
+                    end if;
+

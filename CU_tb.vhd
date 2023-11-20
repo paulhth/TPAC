@@ -33,8 +33,7 @@ ARCHITECTURE behavior OF ControlUnit_tb IS
     -- Clock period definition
     constant clk_period : time := 10 ns;
  
-BEGIN 	  
-	
+BEGIN 
 
     -- Instantiate the Unit Under Test (UUT)
     uut: ControlUnit PORT MAP (
@@ -63,16 +62,26 @@ BEGIN
         reset <= '1';
         wait for 20 ns;
         reset <= '0'; 
-		start <= '1';
+
         -- Apply test values
-        multiplicand <= "0011"; --  multiplicand (3)
-        multiplier <= "0101"; --  multiplier (5)
-        
+        multiplicand <= "0011"; -- Example multiplicand (3)
+        multiplier <= "0101"; -- Example multiplier (5)
+        start <= '1';
         wait for clk_period;
         start <= '0';
 
         -- Wait for the multiplication to complete
-        wait until done = '1';
+        wait until done = '1' or now > 1000 ns; -- Timeout to prevent hanging simulation
+
+        -- Check the result
+        assert product = "00011111" -- Expected product 3 * 5 = 15
+        report "Multiplication result is incorrect"
+        severity error;
+
+        -- Add additional test cases as necessary
+        -- Consider checking the state of the product after each clock cycle for intermediate operations
+
+        -- Finish the test
         wait;
     end process;
 

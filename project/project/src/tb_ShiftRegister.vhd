@@ -55,7 +55,7 @@ begin
     stim_proc: process
     begin
         -- Test 1: Load initial data and perform shift
-        initData <= "11001001";
+        initData <= "10000000";
         load <= '1';  -- Load initial data
         wait for clk_period;
         load <= '0';

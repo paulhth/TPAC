@@ -19,7 +19,7 @@ end entity;
 -- Start of the architecture for the ControlUnit entity
 architecture rtl of ControlUnit is
     -- State type declaration
-    type state_type is (Idle, Load, Add, Subtract, Shift, Check, Finish); -- Declaration of states
+    type state_type is (Idle, Load, Add, Subtract, Shift, Finish); -- Declaration of states
     signal current_state, next_state : state_type; -- Current and next states
 
     -- Signals for ALU and SHREG
@@ -28,7 +28,7 @@ architecture rtl of ControlUnit is
     signal shiftReg : STD_LOGIC_VECTOR(7 downto 0);
     signal loadVal : STD_LOGIC;	   
 	signal shift_signal : STD_LOGIC; -- Signal to control the shift operation	 
-	
+	signal count : integer := 0; -- Counter for the number of shifts
 		
 	-- Declaration of ALU	
     component ALU
@@ -82,9 +82,7 @@ architecture rtl of ControlUnit is
 	end process;	
 	
 	process(current_state, start)
-	variable count : integer := 0; -- Counter for the number of shifts
-	begin	   
-		done <= '0';
+	begin
         case current_state is
             when Idle => -- Wait for start signal
                 if start = '1' then
@@ -92,25 +90,13 @@ architecture rtl of ControlUnit is
                 else
                     next_state <= Idle;
                 end if;
-				
-			when Check =>
-			-- Check if we have to add or subtract
-				if (shiftReg(2) = '0' and shiftReg(1) = '0' and shiftReg(0) = '1') or
-          		   (shiftReg(2) = '0' and shiftReg(1) = '1' and shiftReg(0) = '0') then
-					 next_state <= Add;
-				elsif (shiftReg(2) = '1' and shiftReg(1) = '0' and shiftReg(0) = '1') or
-          		   	  (shiftReg(2) = '1' and shiftReg(1) = '1' and shiftReg(0) = '0')  then
-					 next_state <= Subtract; 
-				else
-					next_state <= Shift;
-				end if;
+          
             
 			 when Load =>
-                    -- Load multiplier and multiplicand  
-					shift_signal <= '0';
-					shiftReg <= multiplicand & "0000"; -- Initialize A and Q 
-					loadVal <= '1'; -- Load the data into the shift register
-                    next_state <= Check; -- Go to Check state to start algorithm
+                    -- Load multiplier and multiplicand
+                    shiftReg <= multiplicand & "0000"; -- Initialize A and Q
+                    loadVal <= '1'; -- Load the data into the shift register
+                    next_state <= Shift; -- Go to Shift state to start algorithm
 
 					
 			
@@ -131,13 +117,14 @@ architecture rtl of ControlUnit is
 			  when Shift =>
                     -- Right shift the shift register
                     loadVal <= '0'; -- No loading, just shifting
-                    shift_signal <= '1'; -- Enable shifting	
-					count := count + 1;
+                    shift_signal <= '1'; -- Enable shifting
                     -- Check if the operation is complete
-                    if count = 7 then
-                        next_state <= Finish; -- If LSB is 1, add the multiplicand
+                    if shiftReg(0) = '1' then
+                        next_state <= Add; -- If LSB is 1, add the multiplicand
+                    elsif shiftReg(1) = '1' then
+                        next_state <= Subtract; -- If second LSB is 1, subtract the multiplicand
                     else
-                        next_state <= Check; -- If second LSB is 1, subtract the multiplicand
+                        next_state <= Finish; -- If both are 0, finish the operation
                     end if;
 
 			
@@ -157,5 +144,14 @@ architecture rtl of ControlUnit is
 	
 	product <= shiftReg;
     done <= '1' when (current_state = Finish) else '0';
+	
+	process(current_state)
+    begin
+        if current_state = Shift then
+            shift_signal <= '1';
+        else
+            shift_signal <= '0';
+        end if;
+    end process;
 
 end rtl;

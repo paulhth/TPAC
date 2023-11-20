@@ -4,7 +4,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity BoothShiftRegister is
     Port ( clk : in STD_LOGIC;
            reset : in STD_LOGIC;
-           load : in STD_LOGIC;
+           load: in STD_LOGIC;		
+		   -- loadQ : in STD_LOGIC; 
            initData : in STD_LOGIC_VECTOR (7 downto 0);
            shift : in STD_LOGIC;
            Q : out STD_LOGIC_VECTOR (7 downto 0));
@@ -21,7 +22,7 @@ begin
             if load = '1' then
                 temp_Q <= initData; -- Load initial data
             elsif shift = '1' then
-                temp_Q <= temp_Q(6 downto 0) & '0'; -- Right shift and append '0'
+                temp_Q <= temp_Q(7) & temp_Q(7 downto 1); -- Right shift and append '0'
             end if;
         end if;
     end process;
