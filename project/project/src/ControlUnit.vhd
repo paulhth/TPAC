@@ -1,35 +1,39 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.numeric_std.all; 
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity ControlUnit is
-    Port (
-        clk : in STD_LOGIC;
-        reset : in STD_LOGIC;
+ENTITY ControlUnit IS
+	PORT
+	(
+		clk : IN STD_LOGIC;
+		reset: in STD_LOGIC; 
 			--input
-        start : in STD_LOGIC;
-        multiplicand : in STD_LOGIC_VECTOR(3 downto 0);
-        multiplier : in STD_LOGIC_VECTOR(3 downto 0);	
+		start : IN STD_LOGIC;
+		multiplicand: IN STD_LOGIC_VECTOR(3 DOWNTO 0);	   
+		multiplier: in STD_LOGIC_VECTOR(3 downto 0);
 			--output
-        product : out STD_LOGIC_VECTOR(7 downto 0);
-        done : out STD_LOGIC
-    );
-end entity;
+		product : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		done : OUT STD_LOGIC
+	);
+END ControlUnit;
 
--- Start of the architecture for the ControlUnit entity
-architecture rtl of ControlUnit is
-    -- State type declaration
-    type state_type is (Idle, LoadQ, LoadA, Add, Subtract, Shift, Check, Finish); -- Declaration of states
-    signal current_state, next_state : state_type; -- Current and next states
+architecture Behavioral of ControlUnit is
+	type state_type IS (Idle, Load, Operation, Finish);
 
-    -- Signals for ALU and SHREG
-    signal aluOp : STD_LOGIC;
-    signal aluResult : STD_LOGIC_VECTOR(3 downto 0);
-    signal AQ : STD_LOGIC_VECTOR(7 downto 0);
-    signal loadVal : STD_LOGIC;	   
-	signal shift_signal : STD_LOGIC; -- Signal to control the shift operation	 
+	SIGNAL state : state_type := Idle;
+	SIGNAL A_reg, B_reg : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL Q, M, Q_reg, M_reg : STD_LOGIC_VECTOR(4 DOWNTO 0);
+	SIGNAL M_neg : STD_LOGIC;
+	SIGNAL counter : INTEGER := 0;
+	SIGNAL result_reg : STD_LOGIC_VECTOR(7 DOWNTO 0);
 	
-		
+	SIGNAL aluOp : STD_LOGIC;
+	SIGNAL aluResult : STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL loadVal : STD_LOGIC;
+	SIGNAL shift_signal : STD_LOGIC; -- Signal to control the shift operation 
+	SIGNAL initData_signal : STD_LOGIC_VECTOR(8 downto 0);
+	-------------------------------------------------------
 	-- Declaration of ALU	
     component ALU
         Port (
@@ -45,18 +49,21 @@ architecture rtl of ControlUnit is
             clk : in STD_LOGIC;
             reset : in STD_LOGIC;
             load : in STD_LOGIC;
-            initData : in STD_LOGIC_VECTOR(7 downto 0);
+            initData : in STD_LOGIC_VECTOR(8 downto 0);
             shift : in STD_LOGIC;
-            Q : out STD_LOGIC_VECTOR(7 downto 0)
+            Q : out STD_LOGIC_VECTOR(8 downto 0)
         );
     end component;
-
-    -- Instantiating components
-    begin
-        alu_inst: ALU
+	-------------------------------------------------------
+	
+	
+	
+begin
+	-------------------------------------------------------
+	alu_inst: ALU
             Port Map (
-                A => AQ(7 downto 4),
-                B => multiplicand,
+                A => A_reg,
+                B => multiplier,
                 op => aluOp,
                 Y => aluResult
             );
@@ -66,108 +73,63 @@ architecture rtl of ControlUnit is
             clk => clk,
             reset => reset,
             load => loadVal,
-            initData => AQ,
-            shift => shift_signal, -- Use the dedicated signal for shifting
-            Q => AQ
+			initData => initData_signal,
+            shift => shift_signal -- Use the dedicated signal for shifting   
         );
-
-    -- FSM for Booth Multiplier
-    process(clk,reset)
-    begin
-        if reset = '1' then
-			current_state <= Idle;	
+	-------------------------------------------------------
+	process (clk, reset)
+	begin
+		if reset = '1' then
+			state <= Idle;
+			counter <= 0;
+			result_reg <= (others => '0');
 		elsif rising_edge(clk) then
-			current_state <= next_state;
-		end if;
-	end process;	
-	
-	process(current_state, start)
-	variable count : integer := 0; -- Counter for the number of shifts 
-	variable F : integer :=0; -- Flag
-	begin	   
-		done <= '0';
-		aluOp <= '0';
-		loadVal <= '0';
-		shift_signal <= '0';
-        case current_state is
-            when Idle => -- Wait for start signal
-                if start = '1' then
-                    next_state <= LoadQ;
-                else
-                    next_state <= Idle;
-                end if;
-				
-			when Check =>
-			-- Check if we have to add or subtract
-				if (AQ(1) = '0' and AQ(0) = '0' and F = 1) or
-          		   (AQ(1) = '0' and AQ(0) = '1' and F = 0) then
-					 next_state <= Add;
-				elsif (AQ(1) = '1' and AQ(0) = '0' and F = 1) or
-          		   	  (AQ(1) = '1' and AQ(0) = '1' and F = 0)  then
-					 next_state <= Subtract; 
-				else
-					next_state <= Shift;
-				end if;
-            
-			 when LoadQ =>
-                    -- Load multiplier and multiplicand  
-					shift_signal <= '0';
-					AQ(7 downto 4) <= multiplicand;
-					AQ(3 downto 0) <= "0000"; -- Initialize A and Q 
-					loadVal <= '1'; -- Load the data into the shift register
-                    next_state <= Check; -- Go to Check state to start algorithm
+			case state is
+				WHEN Idle =>
+					IF start = '1' THEN
+						state <= Load;
+					END IF;
+				WHEN Load =>
+					A_reg <= multiplicand;
+					B_reg <= multiplier;
+					M <= (OTHERS => '0');
+					Q <= (OTHERS => '0');
+					Q_reg <= (OTHERS => '0');
+					M_reg <= (OTHERS => '0');
+					M_neg <= '0';
+					state <= Operation;	  
 					
-			when LoadA =>
-				loadVal <= '1';
-				next_state <= Shift;
-
+				WHEN Operation =>
+					IF counter < 4 THEN
+						IF Q(0) & Q_reg(0) = "01" THEN
+							M_neg <= NOT M_neg;
+							M <= Q_reg + B_reg;
+						ELSIF Q(0) & Q_reg(0) = "10" THEN
+							M <= Q_reg - B_reg;
+						ELSE
+							M <= M_reg;
+						END IF;
+						Q_reg <= Q;
+						Q(0) <= Q_reg(4);
+						Q(4 DOWNTO 1) <= Q_reg(3 DOWNTO 0);
+						Q(4) <= A_reg(3);
+						A_reg <= A_reg(2 DOWNTO 0) & '0';
+						M_reg <= M;
+						B_reg <= "0" & B_reg(3 DOWNTO 1);
+						counter <= counter + 1;
+					ELSE
+						state <= Finish;
+					END IF;
 					
-			
-			 when Add =>
-                    -- Add multiplicand to the upper bits of the shift register
-                    aluOp <= '0'; -- Set ALU for addition
-                    loadVal <= '1'; -- Load the result into the shift register 
-					F := 0;
-                    next_state <= LoadA; -- After adding, go to Shift state
+				WHEN Finish =>
+					result_reg <= Q_reg(3 DOWNTO 0) & M(3 DOWNTO 0);
+					done <= '1';
+					state <= Idle;
 					
-					
-			 when Subtract =>
-                    -- Subtract multiplicand from the upper bits of the shift register
-                    aluOp <= '1'; -- Set ALU for subtraction
-                    loadVal <= '1'; -- Load the result into the shift register
-					F := 1;
-                    next_state <= LoadA; -- After subtracting, go to Shift state
-					
-			
-			  when Shift =>
-                    -- Right shift the shift register
-                    loadVal <= '0'; -- No loading, just shifting
-                    shift_signal <= '1'; -- Enable shifting	
-					count := count + 1;
-					F := 0;
-                    -- Check if the operation is complete
-                    if count = 3 then
-                        next_state <= Finish; -- If LSB is 1, add the multiplicand
-                    else
-                        next_state <= Check; -- If second LSB is 1, subtract the multiplicand
-                    end if;
-
-			
-			  when Finish =>
-                    -- Complete the operation
-                    done <= '1'; -- Signal that operation is complete
-                    next_state <= Idle; -- Return to Idle state
-			
-			
-			
-
-            when others =>
-                next_state <= Idle;
-        end case; 
-		end process;
-
-	
-	product <= AQ;
-    done <= '1' when (current_state = Finish) else '0';
-
-end rtl;
+				WHEN OTHERS =>
+					state <= Idle;
+			END CASE;
+		END IF;
+	END PROCESS;
+	product <= result_reg;
+END Behavioral;

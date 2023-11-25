@@ -1,79 +1,53 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 ENTITY ControlUnit_tb IS
 END ControlUnit_tb;
-
-ARCHITECTURE behavior OF ControlUnit_tb IS 
-
-    -- Component Declaration for the Unit Under Test (UUT)
-    COMPONENT ControlUnit
-    PORT(
-        clk : IN  std_logic;
-        reset : IN  std_logic;
-        start : IN  std_logic;
-        multiplicand : IN  std_logic_vector(3 downto 0);
-        multiplier : IN  std_logic_vector(3 downto 0);
-        product : OUT  std_logic_vector(7 downto 0);
-        done : OUT  std_logic
-        );
-    END COMPONENT;
-   
-    --Inputs
-    signal clk : std_logic := '0';
-    signal reset : std_logic := '0';
-    signal start : std_logic := '0';
-    signal multiplicand : std_logic_vector(3 downto 0) := (others => '0');
-    signal multiplier : std_logic_vector(3 downto 0) := (others => '0');
-
-    --Outputs
-    signal product : std_logic_vector(7 downto 0);
-    signal done : std_logic;
-
-    -- Clock period definition
-    constant clk_period : time := 10 ns;
- 
-BEGIN 	  
-	
-
-    -- Instantiate the Unit Under Test (UUT)
-    uut: ControlUnit PORT MAP (
-        clk => clk,
-        reset => reset,
-        start => start,
-        multiplicand => multiplicand,
-        multiplier => multiplier,
-        product => product,
-        done => done
-    );
-
-    -- Clock process definitions
-    clk_process :process
-    begin
-        clk <= '0';
-        wait for clk_period/2;
-        clk <= '1';
-        wait for clk_period/2;
-    end process;
-
-    -- Testbench statements
-    stim_proc: process
-    begin
-        -- Initialize Inputs
-        reset <= '1';
-        wait for 20 ns;
-        reset <= '0'; 
+ARCHITECTURE TB_ARCH OF ControlUnit_tb IS
+	SIGNAL clk, reset, start : std_logic := '0';
+	SIGNAL multiplicand, multiplier : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL product : std_logic_vector(7 DOWNTO 0);
+	SIGNAL done : std_logic;
+	CONSTANT clock_period : TIME := 5 ns; -- Adjust the clock period as needed
+	-- Instantiate the BoothMultiplier component
+	COMPONENT ControlUnit
+		PORT
+		(
+			clk, reset : IN STD_LOGIC;
+			start : IN STD_LOGIC;
+			multiplicand, multiplier : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+			product : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+			done : OUT STD_LOGIC
+		);
+	END COMPONENT;
+BEGIN
+	-- Instantiate the BoothMultiplier component
+	UUT : ControlUnit
+	PORT MAP(clk, reset, start, multiplicand, multiplier, product, done);
+	-- Clock process
+	PROCESS
+	BEGIN
+		WHILE now < 1000 ns LOOP -- Simulate for 1000 ns
+		clk <= '0';
+		WAIT FOR clock_period / 2;
+		clk <= '1';
+		WAIT FOR clock_period / 2;
+	END LOOP;
+	WAIT;
+	END PROCESS;
+	-- Stimulus process
+	PROCESS
+	BEGIN
+		reset <= '1';
+		WAIT FOR 10 ns;
+		reset <= '0';
+		WAIT FOR 10 ns;
 		start <= '1';
-        -- Apply test values
-        multiplicand <= "0011"; --  multiplicand (3)
-        multiplier <= "0101"; --  multiplier (5)
-        
-        wait for clk_period;
-        start <= '0';
-
-        -- Wait for the multiplication to complete
-        wait until done = '1';
-        wait;
-    end process;
-
-END;
+		multiplicand <= "1011"; -- Example input values
+		multiplier <= "1101";
+		WAIT UNTIL done = '1'; -- Wait for multiplication to complete
+		WAIT;
+	END PROCESS;
+END TB_ARCH;

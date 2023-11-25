@@ -6,13 +6,13 @@ entity BoothShiftRegister is
            reset : in STD_LOGIC;
            load: in STD_LOGIC;		
 		   -- loadQ : in STD_LOGIC; 
-           initData : in STD_LOGIC_VECTOR (7 downto 0);
+           initData : in STD_LOGIC_VECTOR (8 downto 0);
            shift : in STD_LOGIC;
-           Q : out STD_LOGIC_VECTOR (7 downto 0));
+           Q : out STD_LOGIC_VECTOR (8 downto 0));
 end BoothShiftRegister;
 
 architecture Behavioral of BoothShiftRegister is
-    signal temp_Q : STD_LOGIC_VECTOR (7 downto 0); -- Internal signal
+    signal temp_Q : STD_LOGIC_VECTOR (8 downto 0); -- Internal signal
 begin
     process(clk, reset)
     begin
@@ -22,7 +22,7 @@ begin
             if load = '1' then
                 temp_Q <= initData; -- Load initial data
             elsif shift = '1' then
-                temp_Q <= temp_Q(7) & temp_Q(7 downto 1); -- Right shift and append 
+                temp_Q <= temp_Q(8) & temp_Q(8 downto 1); -- Right shift and append 
             end if;
         end if;
     end process;
